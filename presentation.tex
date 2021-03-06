@@ -1,0 +1,255 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage{braket}
+
+\usetheme{Copenhagen}
+\setlength{\parskip}{0.5em}
+
+\title{Quantum Criptograhy}
+\subtitle{With a look at Quantum Key Distribution}
+\author{Michele Beretta}
+\institute{UniBG}
+\date{2021}
+
+\begin{document}
+  \frame{\titlepage}
+
+  \AtBeginSection[]{
+    \begin{frame}
+      \frametitle{Table of Contents}
+      \tableofcontents[currentsection]
+    \end{frame}
+  }
+
+  \section{Introduction}
+  \subsection{Basics}
+  \begin{frame}
+    \frametitle{The Qubit}
+    The \textit{bit} is the fundamental concept of classical computation - it can be either $0$ or $1$.
+
+    In a quantum world, where \textit{superposition of states} is a thing, we use an analogous concept -
+    the \textit{quantum bit}, or \textbf{qubit}.
+
+    A qubit can be in any \textit{linear combination} of two base states.
+  \end{frame}
+  \begin{frame}
+    \frametitle{The Qubit}
+    A classical bit is like a coin - either \textit{head} or \textit{tail}.
+
+    A qubit can be both \textit{head} or \textit{tail} at the same time - that is, until observed.
+
+    Observing a qubit makes it \textit{decay} in one of the base states. Hence, measurement
+    \textit{changes} the real world.
+  \end{frame}
+  \begin{frame}
+    \frametitle{Making a Quantum Computer}
+    Making a qubit is hard - for example, nuclear spin can be mantained for long, but it's hard to measure.
+
+    A good quantum computer has to be \textit{well isolated}, but its qubits have to be \textit{accessible}
+    in order to be manipulated.
+  \end{frame}
+  
+  \subsection{Notation}
+  \begin{frame}
+    \frametitle{A Mathematical Representation}
+    \begin{block}{Qubit}
+      Given two states $\ket{0}$ and $\ket{1}$ a qubit is defined as
+      \begin{equation*}
+        \ket{\psi} = \alpha\ket{0} + \beta\ket{1} \quad \alpha,\beta\in\mathbb C
+      \end{equation*}
+    \end{block}
+
+    For our purposes, it's safe to assume $\alpha,\beta\in\mathbb R$.
+  \end{frame}
+  \begin{frame}
+    \frametitle{Some Linear Algebra}
+    A qubit can be thought as a \textit{vector} in a $2$-dimensional vector space.
+    The states $\ket 0$ and $\ket 1$ are the basis of this space.
+
+    One example could be
+    \begin{equation*}
+      \ket{0} = \begin{bmatrix} 1 \\ 0 \end{bmatrix},
+      \quad
+      \ket{1} = \begin{bmatrix} 0 \\ 1 \end{bmatrix}
+      \implies
+      \ket{\psi} = \begin{bmatrix} \alpha \\ \beta \end{bmatrix}
+    \end{equation*}
+
+    Hence, the \textit{dot product} between two qubits $\ket{\psi}$ and $\ket{\varphi}$ is
+    $\braket{\psi|\varphi}$, and the \textit{tensor product} is given by $\ket{\psi}\otimes\ket{\varphi}$, or
+    the shorter variant $\ket{\psi}\ket{\varphi}$.
+
+    Note that $\bra{\psi} = \ket{\psi}^T$.
+  \end{frame}
+  \begin{frame}
+    \frametitle{Measuring}
+    When measuring a qubit, we can get:
+    \begin{itemize}
+      \item A $0$ with probability $|\alpha|^2$
+      \item A $1$ with probability $|\beta|^2$
+    \end{itemize}
+
+    Hence, since the probabilities must sum to $1$, it has to be
+    \begin{equation*}
+      |\alpha|^2 + |\beta|^2 = 1
+    \end{equation*}
+    Or, in other words, the qubit's state must be normalized.
+  \end{frame}
+  \begin{frame}
+    \frametitle{So what is a qubit?}
+    \begin{block}{Mathematical Representation of a Qubit}
+      A qubit is a \textit{unit vector} in a \textit{two-dimensional complex vector field}.
+    \end{block}
+
+    For example
+    \begin{equation*}
+      \ket\psi = \frac1{\sqrt 2}\ket0 + \frac1{\sqrt 2}\ket1
+    \end{equation*}
+    is a qubit that, when measured, gives either $0$ or $1$ fifty-percent of the time.
+  \end{frame}
+  \begin{frame}
+    \frametitle{More qubits?}
+    We can combine multiple qubits. For example, a two qubit system has four \textit{computational basis}
+    \begin{equation*}
+      \ket\psi = \alpha_{00}\ket{00} + \alpha_{01}\ket{01} + \alpha_{10}\ket{10} + \alpha_{11}\ket{11}
+    \end{equation*}
+
+    In this system, a qubit can be in a superposition on $4$ states.
+
+    In general, if we have $n$ qubits, then the system can be in a superposition of $2^n$ states.
+  \end{frame}
+  \begin{frame}
+    \frametitle{Gates}
+    How do we modify qubits? With \textit{quantum gates}.
+    \begin{block}{Quantum Gate}
+      A quantum gate is a \textit{complex matrix} which must be unitary.
+    \end{block}
+
+    For example, suppose we define the \textbf{NOT} gate as
+    \begin{equation*}
+      X = \begin{bmatrix}
+        0 & 1 \\ 1 & 0
+      \end{bmatrix}
+    \end{equation*}
+
+    Then it's easy to show that
+    \begin{equation*}
+      X\begin{bmatrix}
+        \alpha \\ \beta
+      \end{bmatrix}
+      = \begin{bmatrix}
+        \beta \\ \alpha
+      \end{bmatrix}
+    \end{equation*}
+
+    Hence, a \textbf{NOT} gate inverts the probabilities of measuring $0$ and $1$.
+  \end{frame}
+  \begin{frame}
+    \frametitle{More gates}
+    Two other important gates are:
+    \begin{itemize}
+      \item The \textbf{Z} gate, which flips the sign of the $\ket{1}$ state
+      \begin{equation*}
+        Z = \begin{bmatrix}
+          1 & 0 \\ 0 & -1
+        \end{bmatrix}
+      \end{equation*}
+      \item The \textbf{H} gate, or \textit{Hadamard} gate, used to bring the qubit in a superposition
+      \begin{equation*}
+        H = \frac1{\sqrt 2}\begin{bmatrix}
+          1 & 1 \\ 1 & -1
+        \end{bmatrix}
+      \end{equation*}
+    \end{itemize}  
+  \end{frame}
+  \begin{frame}
+    \frametitle{A multi-qubit gate: CNOT}
+    A \textit{controlled-not} or \textbf{CNOT} gate is a two-qubit input gate, the \textit{control} qubit
+    and the \textit{target} qubit.
+
+    The target qubit is flipped if the control qubit is set to $1$. Its matrix is
+    \begin{equation*}
+      U_{CN} = \begin{bmatrix}
+        1 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+        0 & 0 & 0 & 1 \\
+        0 & 0 & 1 & 0
+      \end{bmatrix}
+    \end{equation*}
+
+    And its effect is such that
+    \begin{equation*}
+      \ket{A,B} \to \ket{A,B\oplus A}
+    \end{equation*}
+
+    Where $\oplus$ is addition modulo two.
+  \end{frame}
+
+  \subsection{No-cloning theorem}
+  \begin{frame}
+    \frametitle{Can we copy a qubit?}
+    If we measure a qubit we destroy its superposition - but can we copy the qubit itself?
+    
+    The answer is \textbf{no}. It is impossible to make a copy of an unknown quantum state.
+  \end{frame}
+  \begin{frame}
+    \frametitle{Proof (1)}
+    Suppose we have a copying machine and we want to copy a qubit $\ket{\psi}$ into another qubit $\ket{s}$.
+    Thus, the initial state of this machine is
+    \begin{equation*}
+      \ket{\psi} \otimes \ket{s}
+    \end{equation*}
+    \pause
+    Suppose we have a unitary evolution $U$ that effects the copying procedure, ideally
+    \begin{equation*}
+      \ket{\psi} \otimes \ket{s} \to U(\ket{\psi} \otimes \ket{s}) = \ket{\psi} \otimes \ket{\psi}
+    \end{equation*}
+    \pause
+    Now, suppose this procedure works for two particular states, $\ket{\psi}$ and $\ket{\varphi}$.
+    Hence we have
+    \begin{align*}
+      U(\ket{\psi}\otimes\ket{s}) &= \ket{\psi}\otimes\ket{\psi} \\
+      U(\ket{\varphi}\otimes\ket{s}) &= \ket{\varphi}\otimes\ket{\varphi}
+    \end{align*}
+  \end{frame}
+  \begin{frame}
+    \frametitle{Proof (2)}
+    Taking the inner product of these two equations gives us
+    \begin{equation*}
+      \braket{\psi|\varphi} = \left(\braket{\psi|\varphi}\right)^2
+    \end{equation*}
+    \pause
+    But $x = x^2$ has only two solutions - $0$ and $1$.
+
+    \pause
+    So $\ket{\psi} = \ket{\varphi}$ or $\ket{\psi}$ and $\ket{\varphi}$ are orthogonal.
+
+    Hence we can only clone orthogonal states, making general quantum cloning impossible.
+  \end{frame}
+
+  \section{Quantum Cryptography}
+  \subsection{Why}
+  \begin{frame}
+    \frametitle{Why}
+    Why
+  \end{frame}
+  \subsection{Quantum Key Distribution}
+  \begin{frame}
+    \frametitle{QKD}
+    QKD
+  \end{frame}
+  \subsection{Security}
+  \begin{frame}
+    \frametitle{Security}
+    Security
+  \end{frame}
+  
+  \section*{}
+  \begin{frame}{Bibliography}
+    \nocite{*}
+    \bibliographystyle{plainnat}
+    \bibliography{bibliography}
+  \end{frame}
+
+\end{document}
