@@ -231,24 +231,130 @@
   \section{Quantum Cryptography}
   \subsection{Why}
   \begin{frame}
-    \frametitle{Why}
-    Why
+    \frametitle{Why do we care about this?}
+    Because of what quantum computers could be capable of - namely, efficiently perform
+    some tasks that \textit{are not feasible on a classical computer}.
+
+    In particular, \textbf{public key cryptography} is based on the infeasibility of
+    prime factorization.
   \end{frame}
+  \begin{frame}
+    \frametitle{Fast prime factorization}
+    For example, finding the prime factorization of an $n$-bit integer requires
+    \begin{equation*}
+      \exp{\Theta\left(n^{\frac13}\log^{\frac23}n\right)}
+    \end{equation*}
+    operations using the \textit{number field sieve}.
+
+    A quantum algorithm can be shown to accomplish the same task using
+    \begin{equation*}
+      O\left(n^2\log n \log\log n\right)
+    \end{equation*}
+    operations - so it's \textit{exponentially faster}.
+
+    The demonstration of this is quite lengthy, but can be found in
+    \cite{nielsen-chuang} or in \cite{de-wolf}.
+  \end{frame}
+
   \subsection{Quantum Key Distribution}
   \begin{frame}
-    \frametitle{QKD}
-    QKD
+    \frametitle{Private Key Cryptography}
+    In a private key cryptosystem, if Alice and Bob wish to exchange information they
+    both must have a \textit{matching key}, used to encrypt and decrypt the message.
+
+    As long as the keys are truly secret, this method is provably secure.
+
+    But how to keep the keys truly secret? The problem is the \textit{secure distribution}
+    of the keys.
   \end{frame}
-  \subsection{Security}
   \begin{frame}
-    \frametitle{Security}
-    Security
+    \frametitle{Quantum Key Distribution (QKD)}
+    It's a \textit{provably secure} protocol by which \textit{private keys} can be created
+    between two parties over a \textit{public channel}, exchanging qubits.
+
+    Basic idea - an external observer (Eve) cannot gain any information from the qubits
+    transmitted without disturbing the state, because
+    \begin{enumerate}
+      \item<1-> Qubits cannot be copied (no-cloning theorem)
+      \item<2-> Information gain is possible at the expense of introducing disturbance (provable)
+    \end{enumerate}
+  \end{frame}
+  \begin{frame}
+    \frametitle{The BB84 Protocol}
+    Suppose Alice and Bob want to distill a shared secret key
+    
+    Alice has two strings $a$ and $b$ of $(4+\delta)n$ bits.
+    She encodes them as a block of $(4+\delta)n$ qubits
+    \begin{equation*}
+      \ket{\psi} = \bigotimes_{k=1}^{(4+\delta)n} \ket{\psi_{a_kb_k}}
+    \end{equation*}
+    where $a_k$ is the $k^\text{th}$ bit of $a$ (similarly for $b$).
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{The BB84 Protocol}
+    So every qubit is one of these four states
+    \begin{align*}
+      \ket{\psi_{00}} &= \ket{0} \\
+      \ket{\psi_{10}} &= \ket{1} \\
+      \ket{\psi_{01}} &= \ket{+} = \frac{\ket0 + \ket1}{\sqrt2} \\
+      \ket{\psi_{11}} &= \ket{-} = \frac{\ket0 - \ket1}{\sqrt2}
+    \end{align*}
+
+    We can think of these as qubits encoded in one of two basis - $X$ or $Z$ - based
+    on the value of the bit $b_k$.
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{The BB84 Protocol}
+    If Eve is eavesdropping, then Bob receives $\mathcal E(\ket{\psi}\bra{\psi})$, where
+    $\mathcal E$ is a quantum operation used to denote the effect of Eve on the channel.
+
+    \pause
+    Bob then publicly announces the fact that he has received the qubits.
+
+    \pause
+    Bob measures each qubit in basis $X$ or $Z$, based on a $(4+\delta)n$ bits,
+    string $b'$, which he creates randomly. Let's call the measurement result $a'$.
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{The BB84 Protocol}
+    Alice publicly transmits $b$, and Alice and Bob discard any bits where Bob measured
+    a different basis than Alice prepared.
+
+    \pause
+    With high probability, there are at least $2n$ bit left (if not, abort). Let's keep only the first $2n$ bits.
+
+    \pause
+    Alice chooses a subset of $n$ bits as a check, and tells Bob which bits she selected.
+    They both compare these, and if more than an acceptable number of bits disagree the protocol is aborted.
+
+    \pause
+    We can obtain a $m$-bits key from the remaining $n$ bits by performing
+    \begin{itemize}
+      \item \textit{Information reconciliation}, a form of error correction
+      \item \textit{Privacy amplification}, a method for reducin Eve's partial information about the key
+    \end{itemize}
+  \end{frame}
+
+  \subsection{In real life}
+  \begin{frame}
+    \frametitle{But does any of this work?}
+    Yes, Quantum Key Distribution has already been tested in real life.
+    For example
+    \begin{itemize}
+      \item In 2015 the Unversity of Geneva and Corning Inc. achieved a secret key
+            rate of $12.7 \mathrm{kbit/s}$ over $307 \mathrm{km}$ \cite{qkd}
+      \item In 2017 the Institute for Quantum Compuing and the University of Waterloo (Canada) achieved
+            quantum key distribution between a ground transmitter and a moving aircraft \cite{airborne}
+    \end{itemize}
   \end{frame}
   
   \section*{}
-  \begin{frame}{Bibliography}
+  \begin{frame}{References and further reading}
     \nocite{*}
-    \bibliographystyle{plainnat}
+    \bibliographystyle{alpha}
     \bibliography{bibliography}
   \end{frame}
 
