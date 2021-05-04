@@ -197,18 +197,16 @@
     The answer is \textbf{no}. It is impossible to make a copy of an unknown quantum state.
   \end{frame}
   \begin{frame}
-    \frametitle{Proof (1)}
+    \frametitle{Proof/1}
     Suppose we have a copying machine and we want to copy a qubit $\ket{\psi}$ into another qubit $\ket{s}$.
     Thus, the initial state of this machine is
     \begin{equation*}
       \ket{\psi} \otimes \ket{s}
     \end{equation*}
-    \pause
     Suppose we have a unitary evolution $U$ that effects the copying procedure, ideally
     \begin{equation*}
       \ket{\psi} \otimes \ket{s} \to U(\ket{\psi} \otimes \ket{s}) = \ket{\psi} \otimes \ket{\psi}
     \end{equation*}
-    \pause
     Now, suppose this procedure works for two particular states, $\ket{\psi}$ and $\ket{\varphi}$.
     We have
     \begin{align*}
@@ -217,15 +215,13 @@
     \end{align*}
   \end{frame}
   \begin{frame}
-    \frametitle{Proof (2)}
+    \frametitle{Proof/2}
     Taking the inner product of these two equations gives us
     \begin{equation*}
       \braket{\psi|\varphi} = \left(\braket{\psi|\varphi}\right)^2
     \end{equation*}
-    \pause
     But $x = x^2$ has only two solutions - $0$ and $1$.
 
-    \pause
     So $\ket{\psi} = \ket{\varphi}$ or $\ket{\psi}$ and $\ket{\varphi}$ are orthogonal.
 
     Hence we can only clone orthogonal states, making general quantum cloning impossible.
@@ -239,7 +235,7 @@
     some tasks that \textit{are not feasible on a classical computer}.
 
     In particular, \textbf{public key cryptography} is based on the infeasibility of
-    prime factorization (or the discrete logarithm problem).
+    some problems, such as prime factorization or discrete logarithm.
   \end{frame}
   \begin{frame}
     \frametitle{Fast prime factorization}
@@ -310,13 +306,11 @@
 
   \begin{frame}
     \frametitle{The BB84 Protocol}
-    If Eve is eavesdropping, then Bob receives $\mathcal E(\ket{\psi}\bra{\psi})$, where
+    If Eve is eavesdropping, then Bob receives a ``disturbed'' version of the qubits $\mathcal E(\ket{\psi})$, where
     $\mathcal E$ is a quantum operation used to denote the effect of Eve on the channel.
 
-    \pause
     Bob then publicly announces the fact that he has received the qubits.
 
-    \pause
     Bob measures each qubit in basis $X$ or $Z$, based on a $(4+\delta)n$ bits,
     string $b'$, which he creates randomly. Let's call the measurement result $a'$.
   \end{frame}
@@ -326,19 +320,27 @@
     Alice publicly transmits $b$, and Alice and Bob discard any bits where Bob measured
     a different basis than Alice prepared.
 
-    \pause
     With high probability, there are at least $2n$ bit left (if not, abort). Let's keep only the first $2n$ bits.
 
-    \pause
     Alice chooses a subset of $n$ bits as a check, and tells Bob which bits she selected.
     They both compare these, and if more than an acceptable number of bits disagree the protocol is aborted.
 
-    \pause
     We can obtain a $m$-bits key from the remaining $n$ bits by performing
     \begin{itemize}
       \item \textit{Information reconciliation}, a form of error correction
       \item \textit{Privacy amplification}, a method for reducing Eve's partial information about the key
     \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Quick demo}
+  
+    \begin{center}
+      \textit{Quick demo!}
+
+      The BB84 protocol simulated in Elixir
+    \end{center}
+  
   \end{frame}
 
   \subsection{In real life}
