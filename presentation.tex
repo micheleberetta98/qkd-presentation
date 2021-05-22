@@ -4,6 +4,8 @@
 \usepackage{braket}
 \usepackage{url}
 
+\graphicspath{{./images/}}
+
 \usetheme{Copenhagen}
 \setlength{\parskip}{0.5em}
 
@@ -79,9 +81,11 @@
       \ket{\psi} = \begin{bmatrix} \alpha \\ \beta \end{bmatrix}
     \end{equation*}
 
-    The \textit{dot product} between two qubits $\ket{\psi}$ and $\ket{\varphi}$ is
-    $\braket{\psi|\varphi}$, and the \textit{tensor product} is given by $\ket{\psi}\otimes\ket{\varphi}$, or
-    the shorter variant $\ket{\psi}\ket{\varphi}$.
+    Some operations
+    \begin{itemize}
+      \item \textit{Dot product}: $\braket{\psi|\varphi}$
+      \item \textit{Tensor product}: $\ket{\psi}\otimes\ket{\varphi} = \ket{\psi}\ket{\varphi}$
+    \end{itemize}
 
     Note that $\bra{\psi} = \ket{\psi}^T$.
   \end{frame}
@@ -93,11 +97,11 @@
       \item A $1$ with probability $|\beta|^2$
     \end{itemize}
 
-    Since the probabilities must sum to $1$, it has to be
+    Since they are probabilities, it has to be
     \begin{equation*}
       |\alpha|^2 + |\beta|^2 = 1
     \end{equation*}
-    Or, in other words, the qubit's state must be normalized.
+    Or, in other words, the qubit's state must be \textit{normalized}.
   \end{frame}
   \begin{frame}
     \frametitle{So what is a qubit?}
@@ -113,7 +117,7 @@
   \end{frame}
   \begin{frame}
     \frametitle{More qubits?}
-    We can combine multiple qubits. For example, a two qubit system has four \textit{computational basis}
+    We can combine multiple qubits. For example, a 2-qubit system has four \textit{computational basis}
     \begin{equation*}
       \ket\psi = \alpha_{00}\ket{00} + \alpha_{01}\ket{01} + \alpha_{10}\ket{10} + \alpha_{11}\ket{11}
     \end{equation*}
@@ -129,15 +133,12 @@
       A quantum gate is a \textit{complex matrix} which must be unitary.
     \end{block}
 
-    For example, suppose we define the \textbf{NOT} gate as
+    For example, the \textbf{NOT} gate is defined as
     \begin{equation*}
       X = \begin{bmatrix}
         0 & 1 \\ 1 & 0
       \end{bmatrix}
-    \end{equation*}
-
-    Then it's easy to show that
-    \begin{equation*}
+      \implies
       X\begin{bmatrix}
         \alpha \\ \beta
       \end{bmatrix}
@@ -146,11 +147,11 @@
       \end{bmatrix}
     \end{equation*}
 
-    Hence, a \textbf{NOT} gate inverts the probabilities of measuring $0$ and $1$.
+    It's called a \textbf{NOT} gate because it inverts the probabilities of measuring $0$ and $1$.
   \end{frame}
   \begin{frame}
     \frametitle{More gates}
-    Two other important gates are:
+    Other important gates are:
     \begin{itemize}
       \item The \textbf{Z} gate, which flips the sign of the $\ket{1}$ state
       \begin{equation*}
@@ -198,17 +199,18 @@
   \end{frame}
   \begin{frame}
     \frametitle{Proof/1}
-    Suppose we have a copying machine and we want to copy a qubit $\ket{\psi}$ into another qubit $\ket{s}$.
-    Thus, the initial state of this machine is
+    It's a proof by absurd.
+
+    Suppose it exists a copying machine that copies a qubit $\ket{\psi}$ into another qubit $\ket{s}$.
+    The initial state of this machine is
     \begin{equation*}
       \ket{\psi} \otimes \ket{s}
     \end{equation*}
-    Suppose we have a unitary evolution $U$ that effects the copying procedure, ideally
+    So there is a unitary evolution $U$ that actually does the copying procedure, ideally
     \begin{equation*}
-      \ket{\psi} \otimes \ket{s} \to U(\ket{\psi} \otimes \ket{s}) = \ket{\psi} \otimes \ket{\psi}
+      \ket{\psi} \otimes \ket{s} \xrightarrow{U} \ket{\psi} \otimes \ket{\psi}
     \end{equation*}
-    Now, suppose this procedure works for two particular states, $\ket{\psi}$ and $\ket{\varphi}$.
-    We have
+    Now, given two particular states $\ket{\psi}$ and $\ket{\varphi}$, we have
     \begin{align*}
       U(\ket{\psi}\otimes\ket{s}) &= \ket{\psi}\otimes\ket{\psi} \\
       U(\ket{\varphi}\otimes\ket{s}) &= \ket{\varphi}\otimes\ket{\varphi}
@@ -220,8 +222,10 @@
     \begin{equation*}
       \braket{\psi|\varphi} = \left(\braket{\psi|\varphi}\right)^2
     \end{equation*}
-    But $x = x^2$ has only two solutions - $0$ and $1$.
-
+    But $x = x^2$ has only two solutions - $0$ and $1$, which means
+    \begin{equation*}
+      \braket{\psi|\varphi} = 0 \vee \braket{\psi|\varphi} = 1
+    \end{equation*}
     So $\ket{\psi} = \ket{\varphi}$ or $\ket{\psi}$ and $\ket{\varphi}$ are orthogonal.
 
     Hence we can only clone orthogonal states, making general quantum cloning impossible.
@@ -231,8 +235,9 @@
   \subsection{Why}
   \begin{frame}
     \frametitle{Why do we care about this?}
-    Because of what quantum computers could be capable of - namely, efficiently perform
-    some tasks that \textit{are not feasible on a classical computer}.
+    Because quantum computers could be capable of a lot of things.
+    
+    Namely, efficiently perform some tasks that \textit{are not feasible on a classical computer}.
 
     In particular, \textbf{public key cryptography} is based on the infeasibility of
     some problems, such as prime factorization or discrete logarithm.
@@ -245,13 +250,13 @@
     \end{equation*}
     operations using the \textit{number field sieve}.
 
-    A quantum algorithm can be shown to accomplish the same task using
+    A quantum algorithm can accomplish the same task using
     \begin{equation*}
       O\left(n^2\log n \log\log n\right)
     \end{equation*}
     operations - so it's \textit{exponentially faster}.
 
-    The demonstration of this is quite lengthy, but can be found in
+    The demonstration is quite lengthy, but can be found in
     \cite{nielsen-chuang} or in \cite{de-wolf}.
   \end{frame}
 
@@ -263,7 +268,7 @@
 
     As long as the keys are truly secret, this method is provably secure.
 
-    But how to keep the keys truly secret? The problem is the \textit{secure distribution}
+    The problem is the \textit{secure distribution}
     of the keys.
   \end{frame}
   \begin{frame}
@@ -271,15 +276,15 @@
     It's a \textit{provably secure} protocol by which \textit{private keys} can be created
     between two parties over a \textit{public channel}, exchanging qubits.
 
-    Basic idea - an external observer (Eve) cannot gain any information from the qubits
+    An external observer (Eve) cannot gain any information from the qubits
     transmitted without disturbing the state, because
     \begin{enumerate}
       \item<1-> Qubits cannot be copied (no-cloning theorem)
-      \item<2-> Information gain is possible at the expense of introducing disturbance (provable)
+      \item<2-> Measurement changes the data itself
     \end{enumerate}
   \end{frame}
   \begin{frame}
-    \frametitle{The BB84 Protocol}
+    \frametitle{The BB84 Protocol/1}
     Suppose Alice and Bob want to distill a shared secret key
     
     Alice has two strings $a$ and $b$ of $(4+\delta)n$ bits.
@@ -291,54 +296,69 @@
   \end{frame}
 
   \begin{frame}
-    \frametitle{The BB84 Protocol}
+    \frametitle{The BB84 Protocol/2}
     So every qubit is one of these four states
     \begin{align*}
-      \ket{\psi_{00}} &= \ket{0} \\
-      \ket{\psi_{10}} &= \ket{1} \\
-      \ket{\psi_{01}} &= \ket{+} = \frac{\ket0 + \ket1}{\sqrt2} \\
-      \ket{\psi_{11}} &= \ket{-} = \frac{\ket0 - \ket1}{\sqrt2}
+      \ket{\psi_{00}} &= \ket{0} & \ket{\psi_{10}} &= \ket{1} \\
+      \ket{\psi_{01}} &= \ket{+} = \frac{\ket0 + \ket1}{\sqrt2} &\ket{\psi_{11}} &= \ket{-} = \frac{\ket0 - \ket1}{\sqrt2}
     \end{align*}
 
     We can think of these as qubits encoded in one of two basis - $X$ or $Z$ - based
-    on the value of the bit $b_k$.
+    on the value of the bit $b_k$:
+    \begin{itemize}
+      \item $b_k = 0 \implies 0 \to \ket0, 1 \to \ket1$
+      \item $b_k = 1 \implies 0 \to \ket{+}, 1 \to \ket{-}$
+    \end{itemize}
   \end{frame}
 
   \begin{frame}
-    \frametitle{The BB84 Protocol}
-    If Eve is eavesdropping, then Bob receives a ``disturbed'' version of the qubits $\mathcal E(\ket{\psi})$, where
-    $\mathcal E$ is a quantum operation used to denote the effect of Eve on the channel.
+    \frametitle{The BB84 Protocol/3}
+    If Eve is eavesdropping, then Bob receives a ``disturbed'' version of the qubits.
 
-    Bob then publicly announces the fact that he has received the qubits.
-
-    Bob measures each qubit in basis $X$ or $Z$, based on a $(4+\delta)n$ bits,
-    string $b'$, which he creates randomly. Let's call the measurement result $a'$.
+    When Bob receives the qubits, he announces it and then
+    measures each qubit in basis $X$ or $Z$, based on a $(4+\delta)n$ bits
+    string $b'$, created randomly. Let's call the measurement result $a'$.
   \end{frame}
 
   \begin{frame}
-    \frametitle{The BB84 Protocol}
+    \frametitle{The BB84 Protocol/4}
     Alice publicly transmits $b$, and Alice and Bob discard any bits where Bob measured
     a different basis than Alice prepared.
 
     With high probability, there are at least $2n$ bit left (if not, abort). Let's keep only the first $2n$ bits.
 
     Alice chooses a subset of $n$ bits as a check, and tells Bob which bits she selected.
+    
+    
     They both compare these, and if more than an acceptable number of bits disagree the protocol is aborted.
+    Otherwise, they have the key!
+  \end{frame}
 
-    We can obtain a $m$-bits key from the remaining $n$ bits by performing
-    \begin{itemize}
-      \item \textit{Information reconciliation}, a form of error correction
-      \item \textit{Privacy amplification}, a method for reducing Eve's partial information about the key
-    \end{itemize}
+  \begin{frame}
+    \frametitle{The BB84 Protocol - summary}
+    \begin{enumerate}
+      \item Alice prepares $(4 + \delta)n$ random data bits - $a$
+      \item Alice randomly chooses $(4 + \delta)n$ random base bits - $b$
+      \item She encodes each data bit $a_i$ as $(\ket0, \ket1)$ if $b_i = 0$, or as $(\ket+, \ket-)$ if $b_i = 1$
+      \item She sends the qubits to Bob
+      \item Once received, Bob measures each qubit in a random base ($X$ or $Z$)
+      \item Alice announces $b$
+      \item Alice and Bob keep only the bits measured in the same bases, and max $2n$ bits
+      \item Alice chooses $n$ bits as a check and tells Bob which ones she selected
+      \item They both compare these bits, and if they match then the remaining bits are the key
+    \end{enumerate}  
   \end{frame}
 
   \begin{frame}
     \frametitle{Quick demo}
   
     \begin{center}
-      \textit{Quick demo!}
+      \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\linewidth]{qkd-bb84-elixir.png}
+      \end{figure}
 
-      The BB84 protocol simulated in Elixir
+      \small{Code available at \url{https://github.com/micheleberetta98/qkd-sim}}
     \end{center}
   
   \end{frame}
