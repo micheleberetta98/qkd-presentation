@@ -7,6 +7,18 @@
 \graphicspath{{./images/}}
 
 \usetheme{Copenhagen}
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{headline}
+{%
+  \leavevmode%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex]{section in head/foot}%
+    \hbox to .5\paperwidth{\hfil\insertsectionhead\hfil}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex]{subsection in head/foot}%
+    \hbox to .5\paperwidth{\hfil\insertsubsectionhead\hfil}
+  \end{beamercolorbox}%
+}
+
 \setlength{\parskip}{0.5em}
 
 \title{Quantum Criptograhy}
@@ -18,10 +30,12 @@
 \date{2021}
 
 \begin{document}
-  \frame{\titlepage}
+  \begin{frame}[plain]
+    \titlepage
+  \end{frame}
 
   \AtBeginSection[]{
-    \begin{frame}
+    \begin{frame}[plain]
       \frametitle{Table of Contents}
       \tableofcontents[currentsection]
     \end{frame}
@@ -271,6 +285,8 @@
       \item Modified Lo-Chau protocol
     \end{enumerate}  
   \end{frame}
+
+  \subsection{The BB84 Protocol}
   \begin{frame}
     \frametitle{The BB84 Protocol/1}
     Suppose Alice and Bob want to distill a shared secret key
@@ -350,22 +366,18 @@
     \end{itemize}
   \end{frame}
 
-  \begin{frame}
+  \begin{frame}[plain]
     \frametitle{Quick demo}
-  
-    \begin{center}
-      \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.8\linewidth]{qkd-bb84-elixir.png}
-      \end{figure}
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=0.8\linewidth]{qkd-bb84-elixir.png}
+    \end{figure}
 
-      \small{Code available at \url{https://github.com/micheleberetta98/qkd-sim}}
-    \end{center}
-  
+    \small{Code available at \url{https://github.com/micheleberetta98/qkd-sim}}
   \end{frame}
-  
+
   \section*{}
-  \begin{frame}{References and further reading}
+  \begin{frame}[plain]{References and further reading}
     \nocite{*}
     \bibliographystyle{alpha}
     \bibliography{bibliography}
