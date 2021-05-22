@@ -42,7 +42,7 @@
     \frametitle{The Qubit}
     A classical bit is like a coin - either \textit{head} or \textit{tail}.
 
-    A qubit can be both \textit{head} or \textit{tail} at the same time - that is, until observed.
+    A qubit can be both \textit{head} or \textit{tail} at the same time - until observed.
 
     Observing a qubit makes it \textit{decay} in one of the base states. Hence, measurement
     \textit{changes} the real world.
@@ -104,7 +104,7 @@
     Or, in other words, the qubit's state must be \textit{normalized}.
   \end{frame}
   \begin{frame}
-    \frametitle{So what is a qubit?}
+    \frametitle{Definition}
     \begin{block}{Mathematical Representation of a Qubit}
       A qubit is a \textit{unit vector} in a \textit{two-dimensional complex vector field}.
     \end{block}
@@ -116,7 +116,7 @@
     is a qubit that, when measured, gives either $0$ or $1$ fifty-percent of the time.
   \end{frame}
   \begin{frame}
-    \frametitle{More qubits?}
+    \frametitle{Multiple qubits}
     We can combine multiple qubits. For example, a 2-qubit system has four \textit{computational basis}
     \begin{equation*}
       \ket\psi = \alpha_{00}\ket{00} + \alpha_{01}\ket{01} + \alpha_{10}\ket{10} + \alpha_{11}\ket{11}
@@ -166,28 +166,6 @@
         \end{bmatrix}
       \end{equation*}
     \end{itemize}  
-  \end{frame}
-  \begin{frame}
-    \frametitle{A multi-qubit gate: CNOT}
-    A \textit{controlled-not} or \textbf{CNOT} gate is a two-qubit input gate, the \textit{control} qubit
-    and the \textit{target} qubit.
-
-    The target qubit is flipped if the control qubit is set to $1$. Its matrix is
-    \begin{equation*}
-      U_{CN} = \begin{bmatrix}
-        1 & 0 & 0 & 0 \\
-        0 & 1 & 0 & 0 \\
-        0 & 0 & 0 & 1 \\
-        0 & 0 & 1 & 0
-      \end{bmatrix}
-    \end{equation*}
-
-    And its effect is such that
-    \begin{equation*}
-      \ket{A,B} \to \ket{A,B\oplus A}
-    \end{equation*}
-
-    Where $\oplus$ is addition modulo two.
   \end{frame}
 
   \subsection{No-cloning theorem}
@@ -279,8 +257,8 @@
     An external observer (Eve) cannot gain any information from the qubits
     transmitted without disturbing the state, because
     \begin{enumerate}
-      \item<1-> Qubits cannot be copied (no-cloning theorem)
-      \item<2-> Measurement changes the data itself
+      \item Qubits cannot be copied (no-cloning theorem)
+      \item Measurement changes the data itself
     \end{enumerate}
   \end{frame}
   \begin{frame}
