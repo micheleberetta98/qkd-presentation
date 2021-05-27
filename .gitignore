@@ -11,3 +11,5 @@
 *.snm
 *.toc
 *.xml
+*.synctex
+*.synctex(busy)

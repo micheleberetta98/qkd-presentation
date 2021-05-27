@@ -168,24 +168,6 @@
 
     It's called a \textbf{NOT} gate because it inverts the probabilities of measuring $0$ and $1$.
   \end{frame}
-  \begin{frame}
-    \frametitle{More gates}
-    Other important gates are:
-    \begin{itemize}
-      \item The \textbf{Z} gate, which flips the sign of the $\ket{1}$ state
-      \begin{equation*}
-        Z = \begin{bmatrix}
-          1 & 0 \\ 0 & -1
-        \end{bmatrix}
-      \end{equation*}
-      \item The \textbf{H} gate, or \textit{Hadamard} gate, used to bring the qubit in a superposition
-      \begin{equation*}
-        H = \frac1{\sqrt 2}\begin{bmatrix}
-          1 & 1 \\ 1 & -1
-        \end{bmatrix}
-      \end{equation*}
-    \end{itemize}  
-  \end{frame}
 
   \subsection{No-cloning theorem}
   \begin{frame}
@@ -263,7 +245,7 @@
     In a private key cryptosystem, if Alice and Bob wish to exchange information they
     both must have a \textit{matching key}, used to encrypt and decrypt the message.
 
-    As long as the keys are truly secret, this method is provably secure.
+    As long as the keys are truly secret, this method is secure.
 
     The problem is the \textit{secure distribution}
     of the keys.
@@ -362,7 +344,7 @@
     \frametitle{The BB84 Protocol - example with photons}
     \begin{figure}[H]
       \centering
-      \includegraphics[width=0.8\linewidth]{bb84-photons.jpeg}
+      \includegraphics[width=0.9\linewidth]{bb84-photons.jpeg}
     \end{figure}
   \end{frame}
 
@@ -386,11 +368,11 @@
       \includegraphics[width=0.8\linewidth]{qkd-bb84-elixir.png}
     \end{figure}
 
-    \small{Code available at \url{https://github.com/micheleberetta98/qkd-sim}}
+    \small{Elixir code at \url{https://github.com/micheleberetta98/qkd-sim}}
   \end{frame}
 
   \section*{}
-  \begin{frame}[plain]{References and further reading}
+  \begin{frame}[plain]{References}
     \nocite{*}
     \bibliographystyle{alpha}
     \bibliography{bibliography}
