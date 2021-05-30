@@ -41,6 +41,18 @@
     \end{frame}
   }
 
+  \section{Motivations}
+  \begin{frame}
+    \frametitle{Why do we care about this?}
+    Because quantum computers could be capable to efficiently perform some
+    tasks that \textit{are not feasible on a classical computer}.
+
+    In particular, \textbf{public key cryptography} is based on the infeasibility of
+    some problems, such as prime factorization or discrete logarithm.
+
+    As we see later, this problems are feasible for a quantum computer.
+  \end{frame}
+
   \section{Introduction}
   \subsection{Basics}
   \begin{frame}
@@ -167,7 +179,7 @@
     It's called a \textbf{NOT} gate because it inverts the probabilities of measuring $0$ and $1$.
   \end{frame}
 
-  \subsection{No-cloning theorem}
+  \subsection{No-cloning Theorem}
   \begin{frame}
     \frametitle{Can we copy a qubit?}
     If we measure a qubit we destroy its superposition - but can we copy the qubit itself?
@@ -209,35 +221,8 @@
   \end{frame}
 
   \section{Quantum Cryptography}
-  \subsection{Why}
-  \begin{frame}
-    \frametitle{Why do we care about this?}
-    Because quantum computers could be capable of a lot of things.
-    
-    Namely, efficiently perform some tasks that \textit{are not feasible on a classical computer}.
 
-    In particular, \textbf{public key cryptography} is based on the infeasibility of
-    some problems, such as prime factorization or discrete logarithm.
-  \end{frame}
-  \begin{frame}
-    \frametitle{Fast prime factorization}
-    For example, finding the prime factorization of an $n$-bit integer requires
-    \begin{equation*}
-      \exp{\Theta\left(n^{\frac13}\log^{\frac23}n\right)}
-    \end{equation*}
-    operations using the \textit{number field sieve}.
-
-    A quantum algorithm can accomplish the same task using
-    \begin{equation*}
-      O\left(n^2\log n \log\log n\right)
-    \end{equation*}
-    operations - so it's \textit{exponentially faster}.
-
-    The demonstration is quite lengthy, but can be found in
-    \cite{nielsen-chuang} or in \cite{de-wolf}.
-  \end{frame}
-
-  \subsection{Quantum Key Distribution}
+  \subsection{Private and Public Key Cryptography}
   \begin{frame}
     \frametitle{Private Key Cryptography}
     In a private key cryptosystem, if Alice and Bob wish to exchange information they
@@ -249,8 +234,29 @@
     of the keys.
   \end{frame}
   \begin{frame}
+    \frametitle{Public Key Cryptography}
+    In a public key cryptosystem, there are two keys - a private one and a public one - used to cipher/decipher
+    sensitive information.
+
+    Prime factorization is one of the bases of public key cryptosystems, since it's a \textit{hard problem},
+    since finding the prime factorization of an $n$-bit integer requires
+    \begin{equation*}
+      \exp{\Theta\left(n^{\frac13}\log^{\frac23}n\right)}
+    \end{equation*}
+    operations using the \textit{number field sieve}.
+    
+    A quantum algorithm can accomplish the same task using
+    \begin{equation*}
+      O\left(n^2\log n \log\log n\right)
+    \end{equation*}
+    operations \cite{nielsen-chuang} \cite{de-wolf}.
+    It's \textit{exponentially faster}, and this could be a problem.
+  \end{frame}
+
+  \subsection{Quantum Key Distribution}
+  \begin{frame}
     \frametitle{Quantum Key Distribution (QKD)}
-    It's a \textit{provably secure} protocol by which \textit{private keys} can be created
+    It's a \textit{provably secure} method by which \textit{private keys} can be created
     between two parties over a \textit{public channel}, exchanging qubits.
 
     An external observer (Eve) cannot gain any information from the qubits
@@ -324,7 +330,7 @@
   \end{frame}
 
   \begin{frame}
-    \frametitle{The BB84 Protocol - summary}
+    \frametitle{The BB84 Protocol - Summary}
     \begin{enumerate}
       \item Alice prepares $(4 + \delta)n$ random data bits - $a$
       \item Alice randomly chooses $(4 + \delta)n$ random base bits - $b$
@@ -339,14 +345,14 @@
   \end{frame}
 
   \begin{frame}
-    \frametitle{The BB84 Protocol - example with photons}
+    \frametitle{The BB84 Protocol - Example with Photons}
     \begin{figure}[H]
       \centering
       \includegraphics[width=0.9\linewidth]{bb84-photons.jpeg}
     \end{figure}
   \end{frame}
 
-  \subsection{In real life}
+  \subsection{In Real Life}
   \begin{frame}
     \frametitle{But does any of this work?}
     Yes, Quantum Key Distribution has already been tested in real life.
