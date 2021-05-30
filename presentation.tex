@@ -239,17 +239,17 @@
     sensitive information.
 
     Prime factorization is one of the bases of public key cryptosystems, since it's a \textit{hard problem},
-    since finding the prime factorization of an $n$-bit integer requires
+    since finding the prime factorization of an $n$-bit integer requires about
     \begin{equation*}
       \exp{\Theta\left(n^{\frac13}\log^{\frac23}n\right)}
     \end{equation*}
-    operations using the \textit{number field sieve}.
+    operations \cite{shor}.
     
     A quantum algorithm can accomplish the same task using
     \begin{equation*}
       O\left(n^2\log n \log\log n\right)
     \end{equation*}
-    operations \cite{nielsen-chuang} \cite{de-wolf}.
+    operations \cite{shor}.
     It's \textit{exponentially faster}, and this could be a problem.
   \end{frame}
 
