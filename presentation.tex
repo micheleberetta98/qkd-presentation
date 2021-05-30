@@ -22,12 +22,12 @@
 \setlength{\parskip}{0.5em}
 
 \title{Quantum Criptograhy}
-\subtitle{With a look at Quantum Key Distribution}
+\subtitle{A look at Quantum Key Distribution}
 \author{Michele Beretta}
 \institute{UniBG
   \\ \url{https://github.com/micheleberetta98/qkd-presentation}
 }
-\date{2021}
+\date{31-05-2021}
 
 \begin{document}
   \begin{frame}[plain]
@@ -105,8 +105,6 @@
       \item \textit{Dot product}: $\braket{\psi|\varphi}$
       \item \textit{Tensor product}: $\ket{\psi}\otimes\ket{\varphi} = \ket{\psi}\ket{\varphi}$
     \end{itemize}
-
-    Note that $\bra{\psi} = \ket{\psi}^T$.
   \end{frame}
   \begin{frame}
     \frametitle{Measuring}
@@ -132,7 +130,7 @@
     \begin{equation*}
       \ket\psi = \frac1{\sqrt 2}\ket0 + \frac1{\sqrt 2}\ket1
     \end{equation*}
-    is a qubit that, when measured, gives either $0$ or $1$ fifty-percent of the time.
+    is a qubit that gives either $0$ or $1$ fifty-percent of the time when measured.
   \end{frame}
   \begin{frame}
     \frametitle{Multiple qubits}
@@ -147,7 +145,7 @@
   \end{frame}
   \begin{frame}
     \frametitle{Gates}
-    How do we modify qubits? With \textit{quantum gates}.
+    \textit{Quantum gates} are used to modify qubits.
     \begin{block}{Quantum Gate}
       A quantum gate is a \textit{complex matrix} which must be unitary.
     \end{block}
@@ -191,8 +189,8 @@
     \end{equation*}
     Now, given two particular states $\ket{\psi}$ and $\ket{\varphi}$, we have
     \begin{align*}
-      U(\ket{\psi}\otimes\ket{s}) &= \ket{\psi}\otimes\ket{\psi} \\
-      U(\ket{\varphi}\otimes\ket{s}) &= \ket{\varphi}\otimes\ket{\varphi}
+      \ket{\psi}\otimes\ket{s} &\xrightarrow{U} \ket{\psi}\otimes\ket{\psi} \\
+      \ket{\varphi}\otimes\ket{s} &\xrightarrow{U} \ket{\varphi}\otimes\ket{\varphi}
     \end{align*}
   \end{frame}
   \begin{frame}
@@ -264,7 +262,7 @@
   \end{frame}
   \begin{frame}
     \frametitle{Some algorithms}
-    There are some algorithms for Quantum Key Distribution, such as:
+    These are some of the algorithms for Quantum Key Distribution:
     \begin{enumerate}
       \item BB84 protocol
       \item B98 protocol
@@ -355,7 +353,7 @@
     For example
     \begin{itemize}
       \item In 2015 the Unversity of Geneva and Corning Inc. achieved a secret key
-            rate of $12.7 \mathrm{kbit/s}$ over $307 \mathrm{km}$ \cite{qkd}
+            rate of $12.7\ \mathrm{kbit/s}$ over $307\ \mathrm{km}$ \cite{qkd}
       \item In 2017 the Institute for Quantum Compuing and the University of Waterloo (Canada) achieved
             quantum key distribution between a ground transmitter and a moving aircraft \cite{airborne}
     \end{itemize}
@@ -365,7 +363,7 @@
     \frametitle{Quick demo}
     \begin{figure}[H]
       \centering
-      \includegraphics[width=0.8\linewidth]{qkd-bb84-elixir.png}
+      \includegraphics[width=0.9\linewidth]{qkd-bb84-elixir.png}
     \end{figure}
 
     \small{Elixir code at \url{https://github.com/micheleberetta98/qkd-sim}}
